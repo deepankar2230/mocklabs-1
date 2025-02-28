@@ -1,0 +1,16 @@
+{% extends "student/base.html" %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+
+{% block content %}
+{% if UO %}
+  <h1>Hello {{UO.first_name}} {{UO.last_name}}</h1>
+     <a href="{{PO.resume}}" download>Download Resume</a>
+{% else %}
+<h1 class="hh">Home page</h1>
+{% endif %}
+
+{% endblock content %}

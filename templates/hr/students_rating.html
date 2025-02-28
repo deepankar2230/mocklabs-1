@@ -1,0 +1,42 @@
+
+{% extends "hr/base.html" %}
+
+{% block title %}
+student ratings
+{% endblock title %}
+
+{% block content %}
+  <h1>student ratings</h1>
+  {% if std_ratings %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">SL No</th>
+        <th scope="col">Name</th>
+        <th scope="col">Trainer</th>
+        <th scope="col">Subject</th>
+        <th scope="col">Technical</th>
+        <th scope="col">Communication</th>
+        <th scope="col">Programming</th>
+        <th scope="col">Remarks</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    {% for rating in std_ratings %}
+    <tbody>
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{rating.student.first_name}} {{rating.student.last_name}}</td>
+        <td>{{rating.conducted_by.first_name}} {{rating.conducted_by.last_name}}</td>
+        <td>{{rating.subject}}</td>
+        <td>{{rating.technical}}</td>
+        <td>{{rating.communicating}}</td>
+        <td>{{rating.programming}}</td>
+        <td>{{rating.remarks}}</td>
+        <td>{{rating.conducted_on}}</td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+  {% endif %} 
+{% endblock content %}

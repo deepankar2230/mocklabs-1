@@ -1,0 +1,16 @@
+{% extends "trainer/base.html" %}
+
+{% block content %}
+<h1>trainer mock</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="id_student">Student:</label>
+    <select name="student" id="id_student">
+        {% for std in std_profile %}
+          <option value="{{std.username}}">{{std.username}}</option>
+          {% endfor %}
+    </select><br><br>
+    {{ERF.as_p}}
+    <input type="submit" value="Submit">
+</form>
+{% endblock content %}

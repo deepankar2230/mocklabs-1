@@ -1,0 +1,21 @@
+
+{% extends "student/base.html" %}
+
+{% block title %}
+Register
+{% endblock title %}
+
+{% block content %}
+<div class="main">
+    <div class="reg">
+        <h1>Register Here</h1>
+        <div class="line"></div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ESUF.as_p}}
+            {{ESPF.as_p}}
+            <input class="sub" type="submit" value="Register">
+        </form>
+    </div>
+</div>
+{% endblock content %}

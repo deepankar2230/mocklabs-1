@@ -1,0 +1,11 @@
+{% extends "manager/base.html" %}
+
+{% block content %}
+  <h1>Add Employee</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{EEUFO.as_p}}
+    {{EEPFO.as_p}}
+    <input type="submit" value="Add Employee">
+  </form>
+{% endblock content %}
