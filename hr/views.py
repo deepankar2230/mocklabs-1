@@ -99,6 +99,7 @@ def hr_change_pw(request):
     return render(request, 'hr/hr_change_pw.html')
 
 
+@hr_login_required
 def schedule_mock(request):
     hrun = request.session.get('hruser')
     UO = User.objects.get(username=hrun)
@@ -136,7 +137,7 @@ During the mock interview, we will focus on {SFDO.cleaned_data.get('subject')}, 
 Please confirm your availability at your earliest convenience. Feel free to reach out if you have any questions. We look forward to helping you prepare!
 
 Best regards,
-{SO.username}
+{SO.first_name} {SO.last_name}
 {PO.role}
 Qspiders
 {PO.pno}"""
