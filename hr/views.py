@@ -20,6 +20,10 @@ def hr_login_required(func):
     return inner
 
 def hr_home(request):
+    un = request.session.get('hruser')
+    if un:
+        UO = User.objects.get(username=un)
+        d = {'UO': UO}
     return render(request, 'hr/hr_home.html')
 
 def hr_login(request):
@@ -58,7 +62,6 @@ def hr_un(request):
                 otp = random.randint(1000, 9999)
                 request.session['otp'] = otp
                 request.session['hruser'] = un
-                print(otp)
                 email = UO.email
                 message = f"Your OTP for forgot password is: {otp}"
                 send_mail(
@@ -116,7 +119,9 @@ def schedule_mock(request):
                     if SO:
                         email = SO.email
                         print(email)
+                        name = f"{SO.first_name} {SO.last_name}"
                         message = f"""
+Dear {name},
 
 I hope you're doing well! We are excited to invite you for a mock interview as part of your preparation for the  at QSpiders. This session is designed to help you practice and receive constructive feedback before your official interview.
 
@@ -142,7 +147,10 @@ Qspiders
                             'deepankarmali2001@gmail.com',
                             [email],
                             fail_silently=False
-                        )                                                                                         
+                        )   
+                        send_mail(
+                            ""
+                        )                                                                                      
             return HttpResponseRedirect(reverse('hr_home'))
         return HttpResponse('Invalid Data')
   

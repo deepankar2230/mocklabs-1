@@ -87,7 +87,6 @@ def student_un(request):
             otp = random.randint(1000, 9999)
             request.session['otp'] = otp
             request.session['username'] = un
-            print(otp)
             email = UO.email
             message = f"Your OTP for forgot password is: {otp}"
             send_mail(
