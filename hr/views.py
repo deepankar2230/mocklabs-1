@@ -141,16 +141,33 @@ Best regards,
 {PO.role}
 Qspiders
 {PO.pno}"""
-        
+                        # sending mail to the students for mock
                         send_mail(
                             f"Subject: Invitation for Mock Interview -  QSpiders Bhubaneswar",
                             message,
                             'deepankarmali2001@gmail.com',
                             [email],
                             fail_silently=False
-                        )   
+                        )
+                        trainer = SFDO.cleaned_data.get('trainer')
+                        TUO = User.objects.get(username=trainer)
+                        msg = f"""Dear {trainer}
+    Mock is scheduled on {SFDO.cleaned_data.get('date')} at {SFDO.cleaned_data.get('time')} at Qspiders Bhubaneswar
+
+
+{TUO.first_name} {TUO.last_name}
+{UO.first_name} {UO.last_name}
+{PO.role}
+Qspiders
+{PO.pno}"""             
+                        # sending mail to the trainer for mock
                         send_mail(
-                            ""
+                            "Mock Scheduled",
+                            msg,
+                            'deepankarmali2001@gmail.com',
+                            [TUO.email],
+                            fail_silently=False
+
                         )                                                                                      
             return HttpResponseRedirect(reverse('hr_home'))
         return HttpResponse('Invalid Data')
