@@ -110,7 +110,7 @@ def schedule_mock(request):
         SFDO = SchedulingForm(request.POST, request.FILES)
         if SFDO.is_valid():
             SFDO.save()
-            with open(r"C:\Users\Deepankar Mali\Desktop\Book1.csv", 'r') as file:
+            with open(f"media\Slots\Slot_{SFDO.cleaned_data.get('trainer')}.csv", 'r') as file:
                 csv_reader = csv.reader(file)
                 next(csv_reader)
                 usernames = [i[1]+i[2] for i in csv_reader]
@@ -175,5 +175,5 @@ Qspiders
 
             return HttpResponseRedirect(reverse('hr_home'))
         return HttpResponse('Invalid Data')
-  
+
     return render(request, 'hr/schedule_mock.html', d)
