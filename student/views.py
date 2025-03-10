@@ -30,33 +30,33 @@ def student_home(request):
     return render(request, 'student/student_home.html')
 
 def student_register(request):
-    ESUF = StudentUserForm()
-    ESPF = StudentProfileForm()
-    d = {'ESUF': ESUF, 'ESPF': ESPF}
-    if request.method == 'POST' and request.FILES:
-        SUFDO = StudentUserForm(request.POST)
-        SPFDO = StudentProfileForm(request.POST, request.FILES)
-        if SUFDO.is_valid() and SPFDO.is_valid():
-            pw = SUFDO.cleaned_data.get('password')
-            MSUFDO = SUFDO.save(commit=False)
-            MSUFDO.set_password(pw)
-            MSUFDO.save()
-            MSPFDO = SPFDO.save(commit=False)
-            MSPFDO.username = MSUFDO
-            MSPFDO.save()
-            return HttpResponseRedirect(reverse('student_login'))
-        return HttpResponse('invalid data')
+    # ESUF = StudentUserForm()
+    # ESPF = StudentProfileForm()
+    # d = {'ESUF': ESUF, 'ESPF': ESPF}
+    # if request.method == 'POST' and request.FILES:
+    #     SUFDO = StudentUserForm(request.POST)
+    #     SPFDO = StudentProfileForm(request.POST, request.FILES)
+    #     if SUFDO.is_valid() and SPFDO.is_valid():
+    #         pw = SUFDO.cleaned_data.get('password')
+    #         MSUFDO = SUFDO.save(commit=False)
+    #         MSUFDO.set_password(pw)
+    #         MSUFDO.save()
+    #         MSPFDO = SPFDO.save(commit=False)
+    #         MSPFDO.username = MSUFDO
+    #         MSPFDO.save() 
+    #         return HttpResponseRedirect(reverse('student_login'))
+    #     return HttpResponse('invalid data')
 
-    # with open(r"C:\Users\Deepankar Mali\Desktop\Book1.csv", mode='r') as file:
-    #     csv_reader = csv.reader(file)
-    #     next(csv_reader)
-    #     for i in (csv_reader):
-    #         UO = User(first_name = i[1], last_name = i[2], email = i[4], username = i[1]+i[2])
-    #         UO.set_password(i[1])
-    #         UO.save()
-    #         PO = StudentProfile(username=UO, phone = i[3], add = i[6], course = i[5])
-    #         PO.save()
-    #     return HttpResponse('done')
+    with open(r"C:\Users\Deepankar Mali\Desktop\Book1.csv", mode='r') as file:
+        csv_reader = csv.reader(file)
+        next(csv_reader)
+        for i in (csv_reader):
+            UO = User(first_name = i[1], last_name = i[2], email = i[4], username = i[1]+i[2])
+            UO.set_password(i[1])
+            UO.save()
+            PO = StudentProfile(username=UO, phone = i[3], add = i[6], course = i[5])
+            PO.save()
+        return HttpResponse('done')
     return render(request, 'student/student_register.html', d)
 
 def student_login(request):

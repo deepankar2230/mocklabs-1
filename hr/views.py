@@ -8,6 +8,7 @@ import csv
 from django.core.mail import send_mail
 from student.models import *
 import random
+from django.db.models import Q
 
 # Create your views here.
 
@@ -20,6 +21,8 @@ def hr_login_required(func):
     return inner
 
 def hr_home(request):
+    uo = User.objects.filter(employees__role = 'HR')
+    print(uo)
     un = request.session.get('hruser')
     if un:
         UO = User.objects.get(username=un)
@@ -101,6 +104,8 @@ def hr_change_pw(request):
 
 @hr_login_required
 def schedule_mock(request):
+    tr = User.objects.filter(employees__role='Trainer')
+    print(tr)
     hrun = request.session.get('hruser')
     UO = User.objects.get(username=hrun)
     PO = EmployeeProfile.objects.get(username=UO)

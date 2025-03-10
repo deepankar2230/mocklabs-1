@@ -8,6 +8,7 @@ from trainer.forms import *
 from student.models import *
 import random
 from django.core.mail import send_mail
+from django.db.models import Q
 
 # Create your views here.
 
