@@ -120,7 +120,7 @@ def schedule_mock(request):
                 next(csv_reader)
                 usernames = [i[1]+i[2] for i in csv_reader]
                 print(usernames)
-                for un in usernames:    
+                for un in usernames:        
                     SO = User.objects.get(username=un)
                     if SO:
                         email = SO.email
